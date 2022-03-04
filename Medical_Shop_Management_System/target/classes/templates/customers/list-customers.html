@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Customer Directory</title>
+	
+	<style>
+ body {
+   font-family: Arial, Helvetica, sans-serif;
+   background-image: url("https://thumbs.dreamstime.com/z/insurance-customer-care-concept-employees-labor-union-life-marketing-segmentation-concepts-protecting-gesture-31437288.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+  }
+</style>
+
+</head>
+	
+
+<div class="container background">
+	
+	<h3>Customer Directory</h3>
+	
+	<hr>
+	
+	
+	
+	<!-- Add a button -->
+	<a th:href="@{/customers/showFormForAdd}"
+		class="btn btn-primary btn-sm mb-3">
+		Add Customer
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Name</th>
+				<th>PhoneNo</th>
+				<th>Address</th>
+				<th>MedicineCatogery</th>
+				<th>MedicineName</th>
+				<th>MedicineQuantity</th>
+				<th>Amount</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempCustomer : ${customers}">
+			
+				<td th:text="${tempCustomer.customerName}" />	
+				<td th:text="${tempCustomer.customerPhoneNo}" />	
+				<td th:text="${tempCustomer.customerAddress}" />
+				<td th:text="${tempCustomer.medicineCatogery}" />
+				<td th:text="${tempCustomer.medicineName}" />
+				<td th:text="${tempCustomer.medicineQuantity}" />
+				<td th:text="${tempCustomer.amount}" />
+				
+				<td>
+				<div class="row">
+				
+					<div class="col-small">
+					<!-- Add "update" button/link -->
+					<form action="#" th:action="@{/customers/showFormForUpdate}" method="POST">
+					
+						<input type="hidden" name="customerId" th:value="${tempCustomer.customerId}" />						
+						<button type="submit" class="btn btn-info btn-sm ml-3 mr-1">Update</button>
+
+					</form>
+					</div>
+					
+					<div class="col-small">
+					<!-- Add "delete" button/link -->					
+					<form action="#" th:action="@{/customers/delete}" method="POST">
+					
+						<input type="hidden" name="customerId" th:value="${tempCustomer.customerId}" />						
+						<button type="submit" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">
+								Delete
+						</button>
+
+					</form>
+					</div>
+				</div>	
+				</td>
+				
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</html>
+
+
+

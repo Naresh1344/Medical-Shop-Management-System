@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Save Customer</title>
+</head>
+
+<body>
+
+	<div class="container">
+	
+		<h3>Customer Directory</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Save Customer</p>
+	
+		<form action="#" th:action="@{/customers/save}"
+						 th:object="${customer}" method="POST">
+		
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{customerId}" />
+			
+			<input type="text" th:field="*{customerName}"
+					class="form-control mb-4 col-4" placeholder="Customer Name" required autofocus="autofocus">
+
+			<input type="text" th:field="*{customerPhoneNo}"
+					class="form-control mb-4 col-4" placeholder="Customer PhoneNo"  minlength="10" maxlength="10" pattern="\d*" title="Numbers only...Please" required autofocus="autofocus">
+
+			<input type="text" th:field="*{customerAddress}"
+					class="form-control mb-4 col-4" placeholder="Customer Address" required autofocus="autofocus">
+					
+			<select th:field="*{medicineCatogery}"
+					class="form-control mb-4 col-4" placeholder="Medicine Category">
+					<option th:value="'Tablet'" th:text="Tablet"></option>
+					<option th:value="'Syrup'" th:text="Syrup"></option>
+			</select>
+			
+			<input type="text" th:field="*{medicineName}"
+					class="form-control mb-4 col-4" placeholder="Medicine Name" required autofocus="autofocus">
+					
+			<input type="text" th:field="*{medicineQuantity}"
+					class="form-control mb-4 col-4" placeholder="Medicine Quantity" required autofocus="autofocus">
+					
+			<input type="text" th:field="*{amount}"
+					class="form-control mb-4 col-4" placeholder="Amount" required autofocus="autofocus">
+				
+			<button type="submit" class="btn btn-info col-2">Save</button>
+						
+		</form>
+	
+		<hr>
+		<a th:href="@{/customers/list}">Back to Customers List</a>
+		
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Medicine Directory</title>
+		<style>
+ body {
+   font-family: Arial, Helvetica, sans-serif;
+   background-image: url("https://c8.alamy.com/comp/2B5JE6D/closeup-colorful-antibiotics-capsule-pills-in-blister-pack-pharmacy-background-antimicrobial-drug-resistance-pharmaceutical-industry-global-healthc-2B5JE6D.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+  }
+</style>
+		
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Medicine Directory</h3>
+	<hr>
+	
+	<!-- Add a button -->
+	<a th:href="@{/medicines/showFormForAdd}"
+		class="btn btn-primary btn-sm mb-3">
+		Add Medicine
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Category</th>
+				<th>Company</th>
+				<th>Quantity</th>
+				<th>ManufactureDate</th>
+				<th>ExpiraryDate</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempMedicine : ${medicines}">
+			
+				<td th:text="${tempMedicine.medicineName}" />	
+				<td th:text="${tempMedicine.medicinePrice}" />	
+				<td th:text="${tempMedicine.medicineCategory}" />	
+				<td th:text="${tempMedicine.medicineCompany}" />	
+				<td th:text="${tempMedicine.medicineQuantity}" />	
+				<td th:text="${tempMedicine.manufactureDate}" />	
+				<td th:text="${tempMedicine.expiraryDate}" />		
+				
+				<td>
+				<div class="row">
+				
+					<div class="col-small">
+					<!-- Add "update" button/link -->
+					<form action="#" th:action="@{/medicines/showFormForUpdate}" method="POST">
+					
+						<input type="hidden" name="medicineId" th:value="${tempMedicine.medicineId}" />						
+						<button type="submit" class="btn btn-info btn-sm ml-3 mr-1">Update</button>
+
+					</form>
+					</div>
+					
+					<div class="col-small">
+					<!-- Add "delete" button/link -->					
+					<form action="#" th:action="@{/medicines/delete}" method="POST">
+					
+						<input type="hidden" name="medicineId" th:value="${tempMedicine.medicineId}" />						
+						<button type="submit" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this Medicine?'))) return false">
+								Delete
+						</button>
+
+					</form>
+					</div>
+				</div>	
+				</td>
+				
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>
+
+
+
